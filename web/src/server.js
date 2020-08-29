@@ -55,6 +55,7 @@ app.use(require("./routers/pages"));
 /**
  * Create server.
  */
-const server = app.listen(3000, function () {
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
   logger.info("Running server");
 });
