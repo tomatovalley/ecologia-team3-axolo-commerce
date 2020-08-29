@@ -18,6 +18,21 @@ route.get("/", function (req, res) {
   );
 });
 
+route.get("/store",function (req,res){
+  let products;
+  db.query(
+    "SELECT * FROM products left join categories on categories.id=products.category",
+    function (err, result, fields) {
+      if (err) {
+        throw err;
+      } else {
+        //console.log(result);
+        res.render("home", { title: "Tienda", products: result });
+      }
+    }
+  );
+});
+
 route.get("/product/:product", function (req, res) {
   let products;
   db.query(
