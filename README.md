@@ -33,7 +33,7 @@ Esta es nuestra participación como el Equipo 3 en el Hackathon de los Supercivi
 ## Stack
 
 <p align="center">
-<img src="https://github.com/tomatovalley/ecologia-team3-axolo-commerce/blob/master/tech.png" width="300" title="Logo Axolo Commerce">
+<img src="https://github.com/tomatovalley/ecologia-team3-axolo-commerce/blob/master/tech.png" width="550" title="Logo Axolo Commerce">
 </p>
 
 Para el desarrollo de este proyecto hemos utilizado:
