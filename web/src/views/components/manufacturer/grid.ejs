@@ -4,22 +4,25 @@
   <div class="card-body">
     <% if(title === 'Home'){ %>
     <a class="text-body" href="/shop/<%= manufacturer.id %>">
-      <img class="img-fluid"
-        src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/<%= manufacturer.picture %>" />
+      <img class="img-fluid" src="<%= manufacturer.picture %>" />
       <h4 class="card-title"><%= manufacturer.title %></h4>
     </a>
     <% } else {%>
-    <img class="img-fluid"
-      src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/<%= manufacturer.picture %>" />
+    <img class="img-fluid" src="<%= manufacturer.picture %>" />
     <h4 class="card-title"><%= manufacturer.title %></h4>
     <% } %>
     <% if(title === 'Home'){ %>
     <p class="card-text"><%= manufacturer.description.substring(0, 100)+' ...' %></p>
     <% } else {%>
     <p class="card-text"><%= manufacturer.description %></p>
+
+    <div class="row">
+      <% products.forEach(function(product){ %>
+      <div class="col-md-3">
+        <% include ../../components/product/grid.ejs %>
+      </div>
+      <% }); %>
+    </div>
     <% } %>
-    <a href="/add-to-cart/pid-<%= manufacturer.id %>" class="card-link"><i class="fa fa-cart-plus"
-        aria-hidden="true"></i>
-      Add to cart</a>
   </div>
 </div>

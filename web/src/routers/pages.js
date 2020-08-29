@@ -3,7 +3,7 @@ const session = require("express-session");
 const route = express.Router();
 const db = require("../database/config");
 
-route.get("/shops", function (req, res) {
+route.get("/", function (req, res) {
   let products;
   db.query(
     "SELECT * FROM manufacturers",
@@ -11,7 +11,7 @@ route.get("/shops", function (req, res) {
       if (err) {
         throw err;
       } else {
-        res.render("manufacturer", { title: "Home", manufacturers: result });
+        res.render("home", { title: "Home", manufacturers: result });
       }
     }
   );
@@ -24,25 +24,22 @@ route.get("/shop/:manufacturer", function (req, res) {
       if (err) {
         throw err;
       } else {
-        res.render("manufacturer", { title: "Tienda", manufacturers: result });
-      }
-    }
-  );
-});
+        let manufacturers = result;
 
-route.get("/", function (req, res) {
-  let products;
-  db.query(
-    "SELECT * FROM products left join categories on categories.id=products.category",
-    function (err, result, fields) {
-      if (err) {
-        throw err;
-      } else {
-        //console.log(result);
-        res.render("home", { title: "Tienda", products: result });
+        db.query(
+          "SELECT * FROM products", req.params.manufacturer,
+          function (err, result, fields) {
+            if (err) {
+              throw err;
+            } else {
+              res.render("manufacturer", { title: "Tienda", manufacturers: manufacturers, products: result });
+            }
+          }
+        );
       }
     }
   );
+
 });
 
 route.get("/product/:product", function (req, res) {
