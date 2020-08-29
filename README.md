@@ -2,7 +2,6 @@
 <img src="https://github.com/tomatovalley/ecologia-team3-axolo-commerce/blob/master/logo.png" width="300" title="Logo Axolo Commerce">
 </p>
 
-
 # Equipo 3 - Axolo Commerce 🛍🌱
 
 Una plataforma de E-commerce ecólogica y del ADN de las cosas.
@@ -16,11 +15,12 @@ Axolo Commerce es un ejercicio de comunidad y empatía por el medio ambiente �
 - [Equipo 3 - Axolo Commerce 🛍🌱](#equipo-3---axolo-commerce-)
   - [📖 Índice](#-índice)
   - [Acerca del proyecto](#acerca-del-proyecto)
+  - [Stack](#stack)
   - [Requisitos](#requisitos)
   - [Comienza](#comienza)
     - [Descarga](#descarga)
   - [Créditos](#créditos)
-    - [Core-Team](#core-team)
+    - [Equipo Axolo team](#equipo-axolo-team)
     - [Otros contribuidores](#otros-contribuidores)
   - [Licencia](#licencia)
 
@@ -30,11 +30,24 @@ TO-DO: Añadir la descripción jej
 
 Esta es nuestra participación como el Equipo 3 en el Hackathon de los SupercivicosMX
 
+## Stack
+
+<p align="center">
+<img src="https://github.com/tomatovalley/ecologia-team3-axolo-commerce/blob/master/tech.png" width="300" title="Logo Axolo Commerce">
+</p>
+
+Para el desarrollo de este proyecto hemos utilizado:
+
+- Flutter
+- NodeJS
+- Express (framework web)
+- HTML5/CSS3
+- MySQL
+- AWS RDS para la base de datos
+
 ## Requisitos
 
-Añade aquí una lista de requerimientos para poder levantar el proyecto en el caso de que sea uno de desarrollo
-
-Ejemplo:
+Para poder levantar el proyecto necesitas del siguiente software instalado y funcionando correctamente en tu equipo
 
 - Editor de código (Recomendamos VS Code)
 - Node.JS
@@ -85,14 +98,14 @@ Ejemplo:
 
     Si los pasos anteriores han funcionado correctamente, ahora puedes ver el proyecto en tu navegador, para hacerlo solo navega a la siguiente ruta: **http://localhost:3000**
 
-
 ## Créditos
 
-### Core-Team
+### Equipo Axolo team
 
 - [mxarc](http://github.com/mxarc)
 - [brandontm](https://github.com/brandontm)
 - [Nicocaputocai](https://github.com/Nicocaputocai)
+- [Leon-Gee](https://github.com/Leon-Gee/)
 
 ### Otros contribuidores
 
