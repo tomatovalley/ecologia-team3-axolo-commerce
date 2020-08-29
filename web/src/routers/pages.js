@@ -6,24 +6,48 @@ const db = require("../database/config");
 route.get("/", function (req, res) {
   let products;
   db.query(
-    "SELECT * FROM products left join categories on categories.id=products.category",
+    "SELECT * FROM manufacturers",
     function (err, result, fields) {
       if (err) {
         throw err;
       } else {
-        //console.log(result);
-        res.render("home", { title: "Tienda", products: result });
+        res.render("home", { title: "Home", manufacturers: result });
       }
     }
   );
+});
+
+route.get("/shop/:manufacturer", function (req, res) {
+  db.query(
+    "SELECT * FROM manufacturers WHERE id = ?", req.params.manufacturer,
+    function (err, result, fields) {
+      if (err) {
+        throw err;
+      } else {
+        let manufacturers = result;
+
+        db.query(
+          "SELECT * FROM products", req.params.manufacturer,
+          function (err, result, fields) {
+            if (err) {
+              throw err;
+            } else {
+              res.render("manufacturer", { title: "Tienda", manufacturers: manufacturers, products: result });
+            }
+          }
+        );
+      }
+    }
+  );
+
 });
 
 route.get("/product/:product", function (req, res) {
   let products;
   db.query(
     "SELECT * FROM products left join categories on categories.id=products.category where pid='" +
-      req.params.product +
-      "'",
+    req.params.product +
+    "'",
     function (err, result, fields) {
       if (err) {
         throw err;
@@ -61,8 +85,8 @@ route.get("/add-to-cart/:product", function (req, res) {
   });*/
   db.query(
     "SELECT * FROM products left join categories on categories.id=products.category where pid='" +
-      product +
-      "'",
+    product +
+    "'",
     function (err, result, fields) {
       if (err) {
         console.log(err);

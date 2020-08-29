@@ -3,15 +3,15 @@
 <!-- Individual view for product -->
 
 <div class="jumbotron text-center">
-  <h1>Axolo stuff</h1>
-  <p>Making paper cities a little bit more paper</p>
+  <h1>My First Bootstrap Page</h1>
+  <p>Resize this responsive page to see the effect!</p>
 </div>
 
 <div class="container">
   <div class="row">
-    <% products.forEach(function(product){ %>
+    <% manufacturers.forEach(function(manufacturer){ %>
     <div class="col-md-12 text-center">
-      <% include components/product/grid.ejs %>
+      <% include components/manufacturer/grid.ejs %>
     </div>
     <% }); %>
   </div>
