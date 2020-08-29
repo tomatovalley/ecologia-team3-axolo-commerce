@@ -55,7 +55,7 @@ Ejemplo:
 
     Con este procedimiento habremos descargado una copia del código del proyecto en nuestra computadora y habremos entrado a la carpeta del proyecto
 
-> **Nota**: También puedes utilizar GitKraken para clonar el repositorio de forma visual o usar el botón de descarga en GitHub
+    > **Nota**: También puedes utilizar GitKraken para clonar el repositorio de forma visual o usar el botón de descarga en GitHub
 
 2. **Instalar dependencias**
 
@@ -67,11 +67,32 @@ Ejemplo:
 
     Este comando nos asegura que el proyecto tenga de forma local todas las dependencias necesarias para ejecutarlo
 
+3. **Correr servidor web**
+
+    Para correr el servidor en modo de desarrollo (se recarga con cada cambio) ejecuta la siguiente instrucción:
+
+    ```bash
+    npm run dev
+    ```
+
+    Para el modo normal, solo ejecuta
+
+    ```bash
+    npm start
+    ```
+  
+4. **Visita el sitio**
+
+    Si los pasos anteriores han funcionado correctamente, ahora puedes ver el proyecto en tu navegador, para hacerlo solo navega a la siguiente ruta: **http://localhost:3000**
+
+
 ## Créditos
 
 ### Core-Team
 
 - [mxarc](http://github.com/mxarc)
+- [brandontm](https://github.com/brandontm)
+- [Nicocaputocai](https://github.com/Nicocaputocai)
 
 ### Otros contribuidores
 
