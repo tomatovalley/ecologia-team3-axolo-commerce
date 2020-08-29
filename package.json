@@ -1,0 +1,10 @@
+{
+  "name": "axolo-commerce",
+  "version": "1.0.0",
+  "description": "Axolo Commerce",
+  "private": true,
+  "scripts": {
+    "postinstall": "yarn --cwd web --production=false install",
+    "build": "yarn --cwd web start"
+  }
+}

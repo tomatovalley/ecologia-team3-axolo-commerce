@@ -57,5 +57,5 @@ app.use(require("./routers/pages"));
  */
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
-  logger.info("Running server");
+  logger.info(`Running server on port ${port}`);
 });

@@ -4,7 +4,8 @@
   "description": "Axolo Commerce",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -e js,css,ejs,json index.js",
+    "start": "node src/server.js",
+    "dev": "nodemon",
     "format": "prettier --write \"./src/**/*.js\""
   },
   "author": "Axolo Team",
