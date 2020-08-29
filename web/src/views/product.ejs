@@ -1,0 +1,19 @@
+<% include include/header.ejs %>
+
+<!-- Individual view for product -->
+
+<div class="jumbotron text-center">
+  <h1>My First Bootstrap Page</h1>
+  <p>Resize this responsive page to see the effect!</p>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% products.forEach(function(product){ %>
+    <div class="col-md-12 text-center">
+      <% include components/product/grid.ejs %>
+    </div>
+    <% }); %>
+  </div>
+</div>
+<% include include/footer.ejs %>

@@ -1,12 +1,13 @@
 {
-  "name": "ecommerce",
+  "name": "axolo-commerce",
   "version": "1.0.0",
-  "description": "It's an ecommerce app",
+  "description": "Axolo Commerce",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -e js,css,ejs,json index.js"
+    "start": "nodemon -e js,css,ejs,json index.js",
+    "format": "prettier --write \"./src/**/*.js\""
   },
-  "author": "Krishna Paul",
+  "author": "Axolo Team",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -17,6 +18,8 @@
     "express-session": "^1.15.6",
     "mysql": "^2.15.0",
     "nodemon": "^2.0.4",
-    "reload": "^2.2.2"
+    "prettier": "^2.1.1",
+    "reload": "^2.2.2",
+    "winston": "^3.3.3"
   }
 }
