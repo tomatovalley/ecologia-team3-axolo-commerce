@@ -7,7 +7,7 @@ class TiendaPage extends StatelessWidget {
     return Container(
       height: double.infinity,
       child: WebView(
-        initialUrl: 'https://flutter.io',
+        initialUrl: 'https://axolo-commerce.herokuapp.com/',
         javascriptMode: JavascriptMode.unrestricted,
       ),
     );
