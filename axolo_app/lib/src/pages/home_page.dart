@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     print('Scanning QR...');
     // geo:40.73255860802501,-73.89333143671877
     scansBloc.agregarScan(new ScanModel(
-        uuid: '23ikiomomsdad',
+        uuid: '23ikiomomskdad',
         descripcion: 'Bla bla bla',
         fecha: '8/29/20',
         imagen: '',
