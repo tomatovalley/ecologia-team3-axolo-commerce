@@ -49,15 +49,26 @@ class ColeccionPage extends StatelessWidget {
                   )),
               key: UniqueKey(),
               child: ListTile(
-                onTap: () => {
-                  // scans[index]
-                },
-                leading:
-                    Icon(Icons.cloud, color: Theme.of(context).primaryColor),
-                title: Text(scans[index].producto),
-                trailing: Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-                subtitle: Text('ID: ${scans[index].uuid}'),
-              ),
+                  onTap: () => {
+                        Navigator.pushNamed(context, 'adn',
+                            arguments: scans[index])
+                      },
+                  leading:
+                      Icon(Icons.note, color: Theme.of(context).primaryColor),
+                  title: Text(scans[index].producto,
+                      style: TextStyle(
+                          color: Colors.black87, fontWeight: FontWeight.bold)),
+                  trailing: Icon(Icons.keyboard_arrow_down),
+                  subtitle: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('ID: ${scans[index].uuid}'),
+                      Text(
+                        scans[index].fecha,
+                        style: TextStyle(color: Colors.grey),
+                      )
+                    ],
+                  )),
             ),
           );
         }

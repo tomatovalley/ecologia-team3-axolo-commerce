@@ -24,15 +24,15 @@ class DBProvider {
 
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'coleccion.db');
+    String path = join(documentsDirectory.path, 'axolo.db');
     return await openDatabase(
       path,
-      version: 3,
+      version: 2,
       onOpen: (Database db) {},
       onCreate: (Database db, int version) async {
         await db.execute('CREATE TABLE Coleccion('
             'uuid TEXT PRIMARY KEY,'
-            'fecha DATE'
+            'fecha DATE,'
             'producto TEXT,'
             'descripcion TEXT,'
             'imagen TEXT'
@@ -49,7 +49,7 @@ class DBProvider {
     final String formatedDate = formatter.format(now);
     final res = await db.rawInsert(
         "INSERT INTO Coleccion(uuid, fecha, producto, descripcion, imagen) "
-        "VALUES ('${nuevoScan.uuid}', '${formatedDate}', '${nuevoScan.producto}', '${nuevoScan.descripcion}', '${nuevoScan.imagen}')");
+        "VALUES ('${nuevoScan.uuid}', '$formatedDate', '${nuevoScan.producto}', '${nuevoScan.descripcion}', '${nuevoScan.imagen}')");
     return res;
   }
 
