@@ -1,0 +1,49 @@
+<% include include/header.ejs %>
+
+<div class="jumbotron text-center">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-8 align-middle align-self-center ">
+        <h1>El mercado ecólogico con huella digital</h1>
+        <p>Bienvenido a Axolo Commerce! 🌱</p>
+      </div>
+      <div class="col-md-4">
+        <img src="img/logo.png" class="img-fluid" alt="Logo">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="container">
+  <h2>Empresas</h2>
+  <div class="row">
+    <% manufacturers.forEach(function(manufacturer){ %>
+    <div class="col-md-3">
+      <% include components/manufacturer/grid.ejs %>
+    </div>
+    <% }); %>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Column 1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 2</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 3</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+  </div>
+</div> -->
+<% include include/footer.ejs %>

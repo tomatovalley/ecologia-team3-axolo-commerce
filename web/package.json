@@ -1,0 +1,28 @@
+{
+  "name": "axolo-commerce",
+  "version": "1.0.0",
+  "description": "Axolo Commerce",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon",
+    "format": "prettier --write \"./src/**/*.js\""
+  },
+  "author": "Axolo Team",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^8.2.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "mysql": "^2.15.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.1.1",
+    "qrcode-generator": "^1.4.4",
+    "reload": "^2.2.2",
+    "uuid": "^8.3.0",
+    "winston": "^3.3.3"
+  }
+}

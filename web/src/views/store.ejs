@@ -1,0 +1,14 @@
+<% include include/header.ejs %>
+
+<div class="container">
+  <div class="row">
+    <% products.forEach(function(product){ %>
+    <div class="col-md-3">
+      <% include components/product/grid.ejs %>
+    </div>
+    <% }); %>
+  </div>
+</div>
+
+
+<% include include/footer.ejs %>

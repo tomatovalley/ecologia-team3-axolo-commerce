@@ -1,0 +1,20 @@
+<% include include/header.ejs %>
+
+<!-- Individual view for product -->
+<div class="container">
+  <div class="row">
+    <% manufacturers.forEach(function(manufacturer){ %>
+    <div class="col-md-12 text-center">
+      <% include components/manufacturer/grid.ejs %>
+    </div>
+    <% }); %>
+  </div>
+
+</div>
+
+<div class="jumbotron text-center">
+  <h1>Colabora!</h1>
+</div>
+
+
+<% include include/footer.ejs %>
