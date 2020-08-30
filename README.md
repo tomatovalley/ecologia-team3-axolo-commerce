@@ -15,6 +15,7 @@ Axolo Commerce es un ejercicio de comunidad y empatía por el medio ambiente �
 - [Equipo 3 - Axolo Commerce 🛍🌱](#equipo-3---axolo-commerce-)
   - [📖 Índice](#-índice)
   - [Acerca del proyecto](#acerca-del-proyecto)
+  - [Capturas de pantalla](#capturas-de-pantalla)
   - [Stack](#stack)
   - [Requisitos](#requisitos)
   - [Comienza](#comienza)
@@ -26,9 +27,20 @@ Axolo Commerce es un ejercicio de comunidad y empatía por el medio ambiente �
 
 ## Acerca del proyecto
 
-TO-DO: Añadir la descripción jej
-
 Esta es nuestra participación como el Equipo 3 en el Hackathon de los SupercivicosMX
+
+## Capturas de pantalla
+|    Plataforma web     |                       |
+| :-------------------: | :-------------------: |
+| ![](screens/web0.png) | ![](screens/web1.png) |
+| ![](screens/web2.png) | ![](screens/web3.png) |
+
+
+|       App Móvil        |                        |
+| :--------------------: | :--------------------: |
+| ![](screens/app1.jpeg) | ![](screens/app2.jpeg) |
+| ![](screens/app3.jpeg) | ![](screens/app4.jpeg) |
+| ![](screens/app5.jpeg) |                        |
 
 ## Stack
 
