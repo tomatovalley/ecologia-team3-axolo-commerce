@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:axolo_app/src/models/scan_model.dart';
-import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -24,15 +23,14 @@ class DBProvider {
 
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'axolo.db');
+    String path = join(documentsDirectory.path, 'axodb.db');
     return await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onOpen: (Database db) {},
       onCreate: (Database db, int version) async {
         await db.execute('CREATE TABLE Coleccion('
             'uuid TEXT PRIMARY KEY,'
-            'fecha DATE,'
             'producto TEXT,'
             'descripcion TEXT,'
             'imagen TEXT'
@@ -42,22 +40,18 @@ class DBProvider {
   }
 
   // Crear registros base de datos
-  nuevoScanRaw(ScanModel nuevoScan) async {
+  nuevoScan(ScanModel nuevoScan) async {
     final db = await database;
-    final DateTime now = DateTime.now();
-    final DateFormat formatter = DateFormat('yyyy-MM-dd');
-    final String formatedDate = formatter.format(now);
+    print("Vamos a insertar");
+    print(nuevoScan.descripcion);
+    print(nuevoScan.uuid);
+    print(nuevoScan.producto);
     final res = await db.rawInsert(
-        "INSERT INTO Coleccion(uuid, fecha, producto, descripcion, imagen) "
-        "VALUES ('${nuevoScan.uuid}', '$formatedDate', '${nuevoScan.producto}', '${nuevoScan.descripcion}', '${nuevoScan.imagen}')");
+        "INSERT INTO Coleccion(uuid, producto, descripcion, imagen) "
+        "VALUES ('${nuevoScan.uuid}', '${nuevoScan.producto}', '${nuevoScan.descripcion}', '${nuevoScan.imagen}')");
+    getScans();
     return res;
   }
-
-  /*nuevoScan(ScanModel nuevoScan) async {
-    final db = await database;
-    final res = await db.insert('Coleccion', nuevoScan.toJson());
-    return res;
-  }*/
 
   // SELECT - Obtener información
   Future<ScanModel> getScanUUID(String uuid) async {
@@ -69,9 +63,16 @@ class DBProvider {
 
   Future<List<ScanModel>> getScans() async {
     final db = await database;
-    final res = await db.query('Coleccion');
+    final res = await db.query('Coleccion',
+        columns: ['uuid', 'producto', 'descripcion', 'imagen']);
     List<ScanModel> list = res.isNotEmpty
-        ? res.map((scan) => ScanModel.fromJson(scan)).toList()
+        ? res
+            .map((scan) => ScanModel(
+                uuid: scan['uuid'],
+                producto: scan['producto'],
+                imagen: scan['imagen'],
+                descripcion: scan['descripcion']))
+            .toList()
         : [];
     return list;
   }

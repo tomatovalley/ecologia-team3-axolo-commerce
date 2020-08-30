@@ -37,8 +37,7 @@ class AdnPage extends StatelessWidget {
             FadeInImage(
                 height: 200,
                 placeholder: AssetImage('assets/placeholder.png'),
-                image: NetworkImage(
-                    'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg')),
+                image: NetworkImage(scan.imagen)),
             SizedBox(
               height: 10,
             ),
@@ -69,7 +68,7 @@ class AdnPage extends StatelessWidget {
                       Text(
                         'Fecha',
                       ),
-                      Text(scan.fecha,
+                      Text("Hoy",
                           style: TextStyle(fontWeight: FontWeight.w500)),
                     ],
                   ),

@@ -69,7 +69,7 @@ class _MapaPageState extends State<MapaPage> {
 
   Future<List<AcopioModel>> _fetchAcopios() async {
     final response =
-        await http.get('https://axolo-commerce.herokuapp.com/acopios/');
+        await http.get('https://axolo-commerce.herokuapp.com/api/acopios');
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
