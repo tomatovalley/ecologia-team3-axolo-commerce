@@ -1,0 +1,151 @@
+
+  Future<ScanModel> _fetchProduct(String uuid) async {
+    final response = await http
+        .get('https://axolo-commerce.herokuapp.com/api/products/uuid/"$uuid"');
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      var productos = new List<ScanModel>();
+      Iterable list = json.decode(response.body);
+      productos = list.map((model) => ScanModel.fromJson(model)).toList();
+      return productos[0];
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load acopios');
+    }
+  }
+
+   void _scanQR(BuildContext context) async {
+    String futureString = '';
+    print('Scanning QR...');
+    try {
+      var result = await BarcodeScanner.scan(options: ScanOptions(strings: {}));
+      futureString = result.rawContent;
+    } catch (e) {
+      futureString = e.toString();
+    }
+    if (futureString != null) {
+      if (futureString.isEmpty) {
+        return;
+      }
+      // hacer peticion http para obtener datos completos del QR
+      final fetchedProduct = await _fetchProduct(futureString);
+      scansBloc.agregarScan(new ScanModel(
+          id: fetchedProduct.id,
+          uuid: fetchedProduct.uuid,
+          descripcion: fetchedProduct.descripcion,
+          imagen: fetchedProduct.imagen,
+          producto: fetchedProduct.producto));
+      //
+      //final ScanModel scanModel = new ScanModel(valor: futureString);
+      // scansBloc.agregarScan(scanModel);
+    }
+  }
+
+
+
+
+  import 'dart:io';
+
+import 'package:axolo_app/src/models/scan_model.dart';
+import 'package:intl/intl.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
+
+export 'package:path_provider/path_provider.dart';
+
+class DBProvider {
+  static Database _database;
+  static final DBProvider db = DBProvider._();
+
+  DBProvider._();
+
+  Future<Database> get database async {
+    if (_database != null) {
+      return _database;
+    }
+    _database = await initDB();
+    return _database;
+  }
+
+  initDB() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, 'testaxo.db');
+    return await openDatabase(
+      path,
+      version: 1,
+      onOpen: (Database db) {},
+      onCreate: (Database db, int version) async {
+        await db.execute('CREATE TABLE Coleccion('
+            'id int PRIMARY KEY,'
+            'uuid TEXT,'
+            'fecha DATE,'
+            'producto TEXT,'
+            'descripcion TEXT,'
+            'imagen TEXT'
+            ')');
+      },
+    );
+  }
+
+  // Crear registros base de datos
+  nuevoScanRaw(ScanModel nuevoScan) async {
+    final db = await database;
+    final DateTime now = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formatedDate = formatter.format(now);
+    print("Se agregará: ");
+    print(nuevoScan.uuid + " | " + nuevoScan.producto);
+    final res = await db.rawInsert(
+        "INSERT INTO Coleccion(id, uuid, fecha, producto, descripcion, imagen) "
+        "VALUES (${nuevoScan.id}, '${nuevoScan.uuid}', '$formatedDate', '${nuevoScan.producto}', '${nuevoScan.descripcion}', '${nuevoScan.imagen}')");
+    return res;
+  }
+
+  /*nuevoScan(ScanModel nuevoScan) async {
+    final db = await database;
+    final res = await db.insert('Coleccion', nuevoScan.toJson());
+    return res;
+  }*/
+
+  // SELECT - Obtener información
+  Future<ScanModel> getScanUUID(String uuid) async {
+    final db = await database;
+    final res =
+        await db.query('Coleccion', where: 'uuid = ?', whereArgs: [uuid]);
+    return res.isNotEmpty ? ScanModel.fromJson(res.first) : null;
+  }
+
+  Future<List<ScanModel>> getScans() async {
+    final db = await database;
+    final res = await db.query('Coleccion');
+    List<ScanModel> list = res.isNotEmpty
+        ? res.map((scan) => ScanModel.fromJson(scan)).toList()
+        : [];
+    return list;
+  }
+
+  // Actualizar registros
+  updateScan(ScanModel model) async {
+    final db = await database;
+    final res = await db.update('Coleccion', model.toJson(),
+        where: 'uuid = ?', whereArgs: [model.uuid]);
+    return res;
+  }
+
+  // Borrar registros
+  Future<int> deleteScan(String uuid) async {
+    final db = await database;
+    final res =
+        await db.delete('Coleccion', where: 'uuid = ?', whereArgs: [uuid]);
+    return res;
+  }
+
+  Future<int> deleteAll() async {
+    final db = await database;
+    final res = await db.rawDelete('DELETE FROM Coleccion');
+    return res;
+  }
+}

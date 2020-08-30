@@ -13,7 +13,7 @@ class AdnPage extends StatelessWidget {
       body: Column(
         children: <Widget>[
           _header(scan),
-          Expanded(child: _crearTimeline()),
+          Expanded(child: _crearTimeline(scan)),
         ],
       ),
     );
@@ -21,7 +21,7 @@ class AdnPage extends StatelessWidget {
 
   Widget _header(ScanModel scan) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: Colors.grey,
@@ -30,15 +30,14 @@ class AdnPage extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             FadeInImage(
                 height: 200,
                 placeholder: AssetImage('assets/placeholder.png'),
-                image: NetworkImage(
-                    'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg')),
+                image: NetworkImage(scan.imagen)),
             SizedBox(
               height: 10,
             ),
@@ -57,7 +56,7 @@ class AdnPage extends StatelessWidget {
                       Text(
                         'Producto',
                       ),
-                      Text(scan.descripcion,
+                      Text(scan.producto,
                           style: TextStyle(fontWeight: FontWeight.w500)),
                     ],
                   ),
@@ -69,7 +68,7 @@ class AdnPage extends StatelessWidget {
                       Text(
                         'Fecha',
                       ),
-                      Text(scan.fecha,
+                      Text("Hoy",
                           style: TextStyle(fontWeight: FontWeight.w500)),
                     ],
                   ),
@@ -82,7 +81,7 @@ class AdnPage extends StatelessWidget {
     );
   }
 
-  Widget _crearTimeline() {
+  Widget _crearTimeline(ScanModel scan) {
     return Container(
       child: ListView(
         shrinkWrap: true,
@@ -91,77 +90,61 @@ class AdnPage extends StatelessWidget {
             alignment: TimelineAlign.manual,
             lineX: 0.1,
             isFirst: true,
-            indicatorStyle: const IndicatorStyle(
+            indicatorStyle: IndicatorStyle(
               width: 20,
               color: Color(0xFF27AA69),
               padding: EdgeInsets.all(6),
             ),
-            rightChild: const _ParentInfo(
-              asset: 'assets/delivery/order_placed.png',
-              title: 'Estado actual',
-              message: 'Este producto ahora está contigo',
+            rightChild: _parentInfo(
+              scan.imagen,
+              'Estado actual',
+              'Este producto ahora está contigo',
             ),
-            topLineStyle: const LineStyle(color: Colors.greenAccent),
+            topLineStyle: LineStyle(color: Colors.greenAccent),
           ),
           TimelineTile(
             alignment: TimelineAlign.manual,
             lineX: 0.1,
             isFirst: false,
-            indicatorStyle: const IndicatorStyle(
+            indicatorStyle: IndicatorStyle(
               width: 20,
               color: Color(0xFF27AA69),
               padding: EdgeInsets.all(6),
             ),
-            rightChild: const _ParentInfo(
-              asset: 'assets/delivery/order_placed.png',
-              title: 'Antes',
-              message: 'IAJSDIPAJS3232',
+            rightChild: _parentInfo(
+              'assets/delivery/order_placed.png',
+              'Antes',
+              'IAJSDIPAJS3232',
             ),
-            topLineStyle: const LineStyle(color: Colors.greenAccent),
+            topLineStyle: LineStyle(color: Colors.greenAccent),
           ),
         ],
       ),
     );
   }
-}
 
-class _ParentInfo extends StatelessWidget {
-  const _ParentInfo({
-    Key key,
-    this.asset,
-    this.title,
-    this.message,
-    this.disabled = false,
-  }) : super(key: key);
-
-  final String asset;
-  final String title;
-  final String message;
-  final bool disabled;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _parentInfo(String asset, String title, String message) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0),
       child: Row(
         children: <Widget>[
           Opacity(
             child: FadeInImage(
                 placeholder: AssetImage('assets/placeholder.png'),
-                height: 55,
-                image: NetworkImage(
-                    'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg')),
-            opacity: disabled ? 0.5 : 1,
+                height: 20,
+                image: NetworkImage(asset)),
+            opacity: 1,
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
                 title,
+                style: TextStyle(fontWeight: FontWeight.w500),
               ),
-              const SizedBox(height: 6),
+              SizedBox(height: 6),
               Text(
                 message,
               ),

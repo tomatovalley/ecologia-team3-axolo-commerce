@@ -27,7 +27,7 @@ class ScansBloc {
   }
 
   agregarScan(ScanModel scanModel) async {
-    DBProvider.db.nuevoScanRaw(scanModel);
+    DBProvider.db.nuevoScan(scanModel);
     obtenerScans();
   }
 

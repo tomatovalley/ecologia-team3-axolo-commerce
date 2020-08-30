@@ -19,58 +19,59 @@ class ColeccionPage extends StatelessWidget {
           return Center(child: Text('No has añadido productos a tu colección'));
         } else {
           return ListView.builder(
-            itemCount: scans.length,
-            itemBuilder: (context, index) => Dismissible(
-              onDismissed: (direction) {
-                scansBloc.borrarScan(scans[index].uuid);
-              },
-              background: Container(
-                  color: Colors.redAccent,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+              itemCount: scans.length,
+              itemBuilder: (context, index) {
+                final ScanModel producto = scans[index];
+                return Dismissible(
+                  onDismissed: (direction) {
+                    scansBloc.borrarScan(scans[index].uuid);
+                  },
+                  background: Container(
+                      color: Colors.redAccent,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(Icons.delete_sweep, color: Colors.white),
-                          Text(
-                            'Borrar',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.delete_sweep, color: Colors.white),
+                              Text(
+                                'Borrar',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ],
                           ),
+                          SizedBox(
+                            width: 30,
+                          )
                         ],
-                      ),
-                      SizedBox(
-                        width: 30,
-                      )
-                    ],
-                  )),
-              key: UniqueKey(),
-              child: ListTile(
-                  onTap: () => {
-                        Navigator.pushNamed(context, 'adn',
-                            arguments: scans[index])
-                      },
-                  leading:
-                      Icon(Icons.note, color: Theme.of(context).primaryColor),
-                  title: Text(scans[index].producto,
-                      style: TextStyle(
-                          color: Colors.black87, fontWeight: FontWeight.bold)),
-                  trailing: Icon(Icons.keyboard_arrow_down),
-                  subtitle: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('ID: ${scans[index].uuid}'),
-                      Text(
-                        scans[index].fecha,
-                        style: TextStyle(color: Colors.grey),
-                      )
-                    ],
-                  )),
-            ),
-          );
+                      )),
+                  key: UniqueKey(),
+                  child: ListTile(
+                      onTap: () => {
+                            Navigator.pushNamed(context, 'adn',
+                                arguments: scans[index])
+                          },
+                      leading: FadeInImage(
+                          image: NetworkImage(producto.imagen),
+                          height: 20,
+                          placeholder: AssetImage('assets/placeholder.png')),
+                      title: Text(producto.producto,
+                          style: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold)),
+                      trailing: Icon(Icons.keyboard_arrow_down),
+                      subtitle: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('ID: ${producto.uuid}'),
+                        ],
+                      )),
+                );
+              });
         }
       },
     );
