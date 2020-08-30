@@ -1,19 +1,31 @@
 <% include include/header.ejs %>
 
 <!-- Individual view for product -->
-
-<div class="jumbotron text-center">
-  <h1>Axolo stuff</h1>
-  <p>Making paper cities a little bit more paper</p>
-</div>
-
 <div class="container">
   <div class="row">
     <% products.forEach(function(product){ %>
-    <div class="col-md-12 text-center">
+    <div class="col-md-6 text-center">
       <% include components/product/grid.ejs %>
     </div>
     <% }); %>
+    <div class="col-md-6 text-center">
+      <h2>Mira el ADN de este item</h2>
+
+      <div id="placeHolder"></div>
+    </div>
+
   </div>
 </div>
+
+</div>
+
+<script type="text/javascript" src="js/qrcode.js"></script>
+<script>
+  var typeNumber = 4;
+  var errorCorrectionLevel = 'L';
+  var qr = qrcode(typeNumber, errorCorrectionLevel);
+  qr.addData('<%= product.uuid %>');
+  qr.make();
+  document.getElementById('placeHolder').innerHTML = qr.createImgTag();
+</script>
 <% include include/footer.ejs %>

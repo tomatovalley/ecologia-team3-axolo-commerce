@@ -1,7 +1,6 @@
 <% include include/header.ejs %>
 <div class="jumbotron text-center">
-  <h1>Cart</h1>
-  <p>Resize this responsive page to see the effect!</p>
+  <h1>Carrito de compras</h1>
 </div>
 
 <div class="container">
@@ -12,35 +11,35 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Action</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% products.forEach(function(product, index) { %>
           <tr>
             <td><a class="text-body" href="/product/<%= product.pid %>"><img style="max-width: 100px; max-height: 50px;"
-                  src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/<%= product.picture %>" /></a>
+                  src="<%= product.picture %>" /></a>
             </td>
             <td><a class="text-body" href="/product/<%= product.pid %>"><%= product.title %></a><br><span
                 class="badge badge-warning"><%= product.name %></span></td>
-            <td>₹<%= product.price %></td>
+            <td>$<%= product.price %></td>
             <td><input type="number" style="width: 70px;" min="1" name="qnt[]" value="<%= product.qnt %>" /></td>
-            <td><a href="/remove-from-cart/pid-<%= index %>">Delete</a></td>
+            <td><a href="/remove-from-cart/pid-<%= index %>">Eliminar</a></td>
           </tr>
           <% }); %>
         </tbody>
       </table>
     </div>
     <div class="clearfix"></div>
-    <a href="/empty-cart" class="btn btn-danger float-left">Clear cart</a>
+    <a href="/empty-cart" class="btn btn-danger float-left">Limpiar carrito</a>
     <a href="/checkout" class="btn btn-primary float-right">Checkout</a>
-    <button class="btn btn-success float-right" style="margin-right: 10px;">Update</button>
+    <button class="btn btn-success float-right" style="margin-right: 10px;">Actualizar</button>
     <div class="clearfix"></div>
     <% } else { %>
-    <p>Your cart is empty. <a href="/shop">Continue shopping</a> </p>
+    <p>Tu carrito está vacio. <a href="/shop">Continuar comprando</a> </p>
     <% } %>
   </form>
 </div>
