@@ -2,7 +2,6 @@ const express = require("express");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const winston = require("winston"); // Logger
 const path = require("path");
 const logger = require("./utils/logger");
 
@@ -37,7 +36,7 @@ app.locals.siteTitle = "🌱 Axolo";
  * set public folder is static to use any where.
  * Public folder contents js, css, images
  */
-app.use(express.static("public"));
+app.use("/public", express.static(path.join(__dirname, "..", "public")));
 /**
  * Add routes.
  */

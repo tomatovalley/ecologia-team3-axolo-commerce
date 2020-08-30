@@ -139,6 +139,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.1"
+  flutter_driving_directions:
+    dependency: "direct main"
+    description:
+      name: flutter_driving_directions
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   flutter_image:
     dependency: transitive
     description:
@@ -178,7 +185,7 @@ packages:
     source: hosted
     version: "2.0.4"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"

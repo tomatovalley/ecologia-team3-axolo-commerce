@@ -1,7 +1,13 @@
+import 'dart:convert';
+
+import 'package:axolo_app/src/models/acopio_model.dart';
 import 'package:axolo_app/src/models/scan_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_driving_directions/flutter_driving_directions.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart' as geo;
+import 'package:http/http.dart' as http;
 import 'package:latlong/latlong.dart';
 
 class MapaPage extends StatefulWidget {
@@ -10,9 +16,14 @@ class MapaPage extends StatefulWidget {
 }
 
 class _MapaPageState extends State<MapaPage> {
+  Future<List<AcopioModel>> futureAcopio;
   final map = new MapController();
-
   String tipoMapa = 'light';
+  @override
+  void initState() {
+    super.initState();
+    futureAcopio = _fetchAcopios();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +47,42 @@ class _MapaPageState extends State<MapaPage> {
   }
 
   Widget _crearFlutterMap(ScanModel scan) {
-    return FutureBuilder(
-        future: _obtenerUbicacion(),
-        initialData: LatLng(0.0, 0.0),
-        builder: (context, snapshot) {
+    return FutureBuilder<List<AcopioModel>>(
+      future: futureAcopio,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          // return Text(snapshot.data);
+          print('ahuevo');
           return FlutterMap(
             mapController: map,
-            options: MapOptions(center: snapshot.data, zoom: 9),
-            layers: [
-              _crearMapa(),
-            ],
-            //  _crearMarcadores(scan)
+            options: MapOptions(zoom: 9),
+            layers: [_crearMapa(), _crearMarcadores(snapshot.data.toList())],
           );
-        });
+        } else if (snapshot.hasError) {
+          print("${snapshot.error}");
+        }
+        // By default, show a loading spinner.
+        return Center(child: CircularProgressIndicator());
+      },
+    );
+  }
+
+  Future<List<AcopioModel>> _fetchAcopios() async {
+    final response =
+        await http.get('https://axolo-commerce.herokuapp.com/acopios/');
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      var acopios = new List<AcopioModel>();
+      Iterable list = json.decode(response.body);
+      acopios = list.map((model) => AcopioModel.fromJson(model)).toList();
+      return acopios;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load acopios');
+    }
   }
 
   _crearMapa() {
@@ -69,19 +103,38 @@ class _MapaPageState extends State<MapaPage> {
     return LatLng(location.latitude, location.longitude);
   }
 
-  /*_crearMarcadores(ScanModel scan) {
-    return MarkerLayerOptions(markers: <Marker>[
-      Marker(
-          width: 100.0,
-          height: 100.0,
-          point: scan.getCoordenadas(),
-          builder: (context) => Container(
-                child: Icon(
-                  Icons.location_on,
-                  size: 70.0,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ))
-    ]);
-  }*/
+  _crearMarcadores(List<AcopioModel> acopios) {
+    List<Marker> marcadores = acopios
+        .toList()
+        .map((acopio) => Marker(
+              width: 180.0,
+              height: 180.0,
+              point: LatLng(acopio.lat, acopio.lng),
+              builder: (context) => Container(
+                  child: Column(
+                children: [
+                  Text(acopio.name),
+                  SizedBox(height: 20),
+                  InkWell(
+                      onTap: () async {
+                        try {
+                          await FlutterDrivingDirections.launchDirections(
+                              latitude: acopio.lat,
+                              longitude: acopio.lng,
+                              address: '');
+                        } on PlatformException {
+                          debugPrint('Failed to launch directions.');
+                        }
+                      },
+                      child: Icon(
+                        Icons.location_on,
+                        size: 70.0,
+                        color: Theme.of(context).primaryColor,
+                      ))
+                ],
+              )),
+            ))
+        .toList();
+    return MarkerLayerOptions(markers: marcadores);
+  }
 }

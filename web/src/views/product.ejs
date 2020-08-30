@@ -1,22 +1,35 @@
 <% include include/header.ejs %>
 
 <!-- Individual view for product -->
-<div class="container">
+
+<div class="container mt-5">
+  <% products.forEach(function(product){ %>
   <div class="row">
-    <% products.forEach(function(product){ %>
-    <div class="col-md-6 text-center">
+    <div class="col-sm m-r-5">
       <% include components/product/grid.ejs %>
     </div>
-    <div class="col-md-6 text-center">
-      <h2 style="margin-top: 40px;">Mira el ADN de este item</h2>
+    <div class="col-sm m-r-5"">
+      <h2 style=" margin-top: 40px;">Mira el ADN de este item</h2>
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=<%= product.uuid %>" class="img-fluid"
         alt="QR Code">
       <p style="margin-top: 15px;">Escanea este código en la app móvil para ver el código ADN de este producto</p>
+    </div>
+    <div class="col-sm">
+      <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+        <div class="card-header">¿Sabías que?</div>
+        <div class="card-body">
+          <h4 class="card-title">INFO</h4>
+          <p class="card-text">La fabricación de pulpa de papel reciclada, en comparación con la generación de pulpa de
+            árboles y otras plantas para fabricar nuevos productos de papel, consume menos energía y agua. Reciclar una
+            tonelada de papel ahorra energía equivalente a la necesaria para alimentar un hogar promedio durante seis
+            meses y ahorra alrededor de 25.000 litros de agua. Al convertir el papel reciclado en nuevos productos de
+            papel se ahorra energía y agua porque se reduce la cantidad de pasos y procesos intensivos.</p>
+        </div>
+      </div>
     </div>
     <% }); %>
   </div>
 </div>
 
-</div>
 
 <% include include/footer.ejs %>
