@@ -43,6 +43,8 @@ app.use(express.static("public"));
  */
 app.use(require("./routers/pages"));
 app.use(require("./routers/api/acopios"));
+app.use(require("./routers/api/products"));
+app.use(require("./routers/api/tracking"));
 
 /**
  * Cache

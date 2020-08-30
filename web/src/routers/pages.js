@@ -5,36 +5,33 @@ const db = require("../database/config");
 
 route.get("/", function (req, res) {
   let products;
-  db.query(
-    "SELECT * FROM manufacturers",
-    function (err, result, fields) {
-      if (err) {
-        throw err;
-      } else {
-        res.render("home", { title: "Home", manufacturers: result });
-      }
+  db.query("SELECT * FROM manufacturers", function (err, result, fields) {
+    if (err) {
+      throw err;
+    } else {
+      res.render("home", { title: "Home", manufacturers: result });
     }
-  );
+  });
 });
 
 route.get("/donate/:manufacturer", function (req, res) {
   db.query(
-    "SELECT name, description, ciudad,telephone FROM manufacturers WHERE id = ?", req.params.manufacturer,
+    "SELECT name, description, ciudad,telephone FROM manufacturers WHERE id = ?",
+    req.params.manufacturer,
     function (err, result, fields) {
       if (err) {
         throw err;
       } else {
         let manufacturers = result;
-
       }
     }
   );
-
 });
 
 route.get("/shop/:manufacturer", function (req, res) {
   db.query(
-    "SELECT * FROM manufacturers WHERE id = ?", req.params.manufacturer,
+    "SELECT * FROM manufacturers WHERE id = ?",
+    req.params.manufacturer,
     function (err, result, fields) {
       if (err) {
         throw err;

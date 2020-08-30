@@ -1,19 +1,22 @@
 <% include include/header.ejs %>
 
 <!-- Individual view for product -->
-
-<div class="jumbotron text-center">
-  <h1>Axolo stuff</h1>
-  <p>Making paper cities a little bit more paper</p>
-</div>
-
 <div class="container">
   <div class="row">
     <% products.forEach(function(product){ %>
-    <div class="col-md-12 text-center">
+    <div class="col-md-6 text-center">
       <% include components/product/grid.ejs %>
+    </div>
+    <div class="col-md-6 text-center">
+      <h2 style="margin-top: 40px;">Mira el ADN de este item</h2>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=<%= product.uuid %>" class="img-fluid"
+        alt="QR Code">
+      <p style="margin-top: 15px;">Escanea este código en la app móvil para ver el código ADN de este producto</p>
     </div>
     <% }); %>
   </div>
 </div>
+
+</div>
+
 <% include include/footer.ejs %>
