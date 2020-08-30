@@ -42,7 +42,7 @@ route.get("/shop/:manufacturer", function (req, res) {
         let manufacturers = result;
 
         db.query(
-          "SELECT * FROM products", req.params.manufacturer,
+          "SELECT * FROM products WHERE id_manufacturer = ?", req.params.manufacturer,
           function (err, result, fields) {
             if (err) {
               throw err;
