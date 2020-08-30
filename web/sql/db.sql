@@ -27,13 +27,14 @@ CREATE TABLE `manufacturers`(
     `lat` DOUBLE NULL,
     `lng` DOUBLE NULL
 );
-INSERT INTO manufacturers(title, description, id_category, city, phone, lat, lng)
+INSERT INTO manufacturers(title, description, id_category, city, phone, picture, lat, lng)
 VALUES(
     'Manufacturador de productos de papel',
     'Manufacturación de productos utilizando papel reciclado',
     1,
     'Culiacán',
     '6671234567',
+    'https://www.suractual.cl/wp-content/uploads/2019/02/industria-manifactura-papel.jpg',
     24.797733,
     -107.387154
 );
