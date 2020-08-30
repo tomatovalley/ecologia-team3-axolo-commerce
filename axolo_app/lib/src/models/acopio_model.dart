@@ -18,7 +18,7 @@ class AcopioModel {
   });
 
   int id;
-  String cateogory;
+  int cateogory;
   String name;
   String phone;
   String picture;
