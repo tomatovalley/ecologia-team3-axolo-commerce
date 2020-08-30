@@ -7,25 +7,16 @@
     <div class="col-md-6 text-center">
       <% include components/product/grid.ejs %>
     </div>
-    <% }); %>
     <div class="col-md-6 text-center">
-      <h2>Mira el ADN de este item</h2>
-
-      <div id="placeHolder"></div>
+      <h2 style="margin-top: 40px;">Mira el ADN de este item</h2>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=<%= product.uuid %>" class="img-fluid"
+        alt="QR Code">
+      <p style="margin-top: 15px;">Escanea este código en la app móvil para ver el código ADN de este producto</p>
     </div>
-
+    <% }); %>
   </div>
 </div>
 
 </div>
 
-<script type="text/javascript" src="js/qrcode.js"></script>
-<script>
-  var typeNumber = 4;
-  var errorCorrectionLevel = 'L';
-  var qr = qrcode(typeNumber, errorCorrectionLevel);
-  qr.addData('<%= product.uuid %>');
-  qr.make();
-  document.getElementById('placeHolder').innerHTML = qr.createImgTag();
-</script>
 <% include include/footer.ejs %>
