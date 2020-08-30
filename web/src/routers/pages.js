@@ -17,6 +17,21 @@ route.get("/", function (req, res) {
   );
 });
 
+route.get("/donate/:manufacturer", function (req, res) {
+  db.query(
+    "SELECT name, description, ciudad,telephone FROM manufacturers WHERE id = ?", req.params.manufacturer,
+    function (err, result, fields) {
+      if (err) {
+        throw err;
+      } else {
+        let manufacturers = result;
+
+      }
+    }
+  );
+
+});
+
 route.get("/shop/:manufacturer", function (req, res) {
   db.query(
     "SELECT * FROM manufacturers WHERE id = ?", req.params.manufacturer,
@@ -45,7 +60,7 @@ route.get("/shop/:manufacturer", function (req, res) {
 route.get("/product/:product", function (req, res) {
   let products;
   db.query(
-    "SELECT * FROM products left join categories on categories.id=products.category where pid='" +
+    "SELECT * FROM products left join categories on categories.id=products.id_category where pid='" +
     req.params.product +
     "'",
     function (err, result, fields) {
@@ -84,7 +99,7 @@ route.get("/add-to-cart/:product", function (req, res) {
     qnt: 1
   });*/
   db.query(
-    "SELECT * FROM products left join categories on categories.id=products.category where pid='" +
+    "SELECT * FROM products left join categories on categories.id=products.id_category where pid='" +
     product +
     "'",
     function (err, result, fields) {
@@ -158,7 +173,7 @@ route.get("/cart", function (req, res) {
       session_products.push(product.id);
     });
     session_products = session_products.join("\', \'");
-    db.query("SELECT * FROM products left join categories on categories.id=products.category where pid in('"+session_products+"')", function (err, result, fields) {
+    db.query("SELECT * FROM products left join categories on categories.id=products.id_category where pid in('"+session_products+"')", function (err, result, fields) {
       if (err) {
         throw err;
       } else {

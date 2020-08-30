@@ -8,14 +8,21 @@
       <h4 class="card-title"><%= manufacturer.title %></h4>
     </a>
     <% } else {%>
-    <img class="img-fluid" src="<%= manufacturer.picture %>" />
-    <h4 class="card-title"><%= manufacturer.title %></h4>
+    <div class="row">
+      <div class="col-3">
+        <img class="img-thumbnail rounded-circle" src="<%= manufacturer.picture %>" />
+      </div>
+      <div class="col-9 text-left">
+        <p class="display-4"><%= manufacturer.title %></h4>
+          <hr>
+        <p><%= manufacturer.description %></p>
+      </div>
+    </div>
+    <hr>
     <% } %>
     <% if(title === 'Home'){ %>
     <p class="card-text"><%= manufacturer.description.substring(0, 100)+' ...' %></p>
     <% } else {%>
-    <p class="card-text"><%= manufacturer.description %></p>
-
     <div class="row">
       <% products.forEach(function(product){ %>
       <div class="col-md-3">
