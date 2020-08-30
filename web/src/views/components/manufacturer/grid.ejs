@@ -1,0 +1,35 @@
+<!-- Component to show product -->
+
+<div class="card rounded-0" style="margin-bottom: 20px;">
+  <div class="card-body">
+    <% if(title === 'Home'){ %>
+    <a class="text-body" href="/shop/<%= manufacturer.id %>">
+      <img class="img-fluid" src="<%= manufacturer.picture %>" />
+      <h4 class="card-title"><%= manufacturer.title %></h4>
+    </a>
+    <% } else {%>
+    <div class="row">
+      <div class="col-3">
+        <img class="img-thumbnail rounded-circle" src="<%= manufacturer.picture %>" />
+      </div>
+      <div class="col-9 text-left">
+        <p class="display-4"><%= manufacturer.title %></h4>
+          <hr>
+        <p><%= manufacturer.description %></p>
+      </div>
+    </div>
+    <hr>
+    <% } %>
+    <% if(title === 'Home'){ %>
+    <p class="card-text"><%= manufacturer.description.substring(0, 100)+' ...' %></p>
+    <% } else {%>
+    <div class="row">
+      <% products.forEach(function(product){ %>
+      <div class="col-md-3">
+        <% include ../../components/product/grid.ejs %>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+  </div>
+</div>
