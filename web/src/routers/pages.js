@@ -54,15 +54,13 @@ route.get("/shop/:manufacturer", function (req, res) {
       }
     }
   );
-
 });
 
 route.get("/product/:product", function (req, res) {
   let products;
   db.query(
-    "SELECT * FROM products left join categories on categories.id=products.id_category where pid='" +
-    req.params.product +
-    "'",
+    "SELECT * FROM products left join categories on categories.id=products.id_category where pid = ?",
+    req.params.product,
     function (err, result, fields) {
       if (err) {
         throw err;
@@ -99,9 +97,8 @@ route.get("/add-to-cart/:product", function (req, res) {
     qnt: 1
   });*/
   db.query(
-    "SELECT * FROM products left join categories on categories.id=products.id_category where pid='" +
-    product +
-    "'",
+    "SELECT * FROM products left join categories on categories.id=products.id_category where pid = ?",
+    product,
     function (err, result, fields) {
       if (err) {
         console.log(err);
