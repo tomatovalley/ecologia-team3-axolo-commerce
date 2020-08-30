@@ -3,7 +3,7 @@ const logger = require("../../utils/logger");
 const route = express.Router();
 const db = require("../../database/config");
 
-route.get("/acopios/:id", (req, res) => {
+route.get("/api/acopios/:id", (req, res) => {
   const idAcopio = req.params.id;
   if (!idAcopio) {
     logger.error("ID was not supplied");
@@ -35,7 +35,7 @@ route.get("/acopios/:id", (req, res) => {
   );
 });
 
-route.get("/acopios", (req, res) => {
+route.get("/api/acopios", (req, res) => {
   // build SQL Sentence
   db.query(
     `SELECT M.id, M.title, C.category, M.phone, M.picture, M.lat, M.lng FROM manufacturers M ` +
