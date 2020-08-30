@@ -17,6 +17,21 @@ route.get("/", function (req, res) {
   );
 });
 
+route.get("/donate/:manufacturer", function (req, res) {
+  db.query(
+    "SELECT name, description, ciudad,telephone FROM manufacturers WHERE id = ?", req.params.manufacturer,
+    function (err, result, fields) {
+      if (err) {
+        throw err;
+      } else {
+        let manufacturers = result;
+        
+      }
+    }
+  );
+
+});
+
 route.get("/shop/:manufacturer", function (req, res) {
   db.query(
     "SELECT * FROM manufacturers WHERE id = ?", req.params.manufacturer,
