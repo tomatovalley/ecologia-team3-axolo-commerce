@@ -4,13 +4,11 @@
   <div class="card-body">
     <% if(title === 'Tienda'){ %>
     <a class="text-body" href="/product/<%= product.pid %>">
-      <img class="img-fluid"
-        src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/<%= product.picture %>" />
+      <img class="img-fluid" src="<%= product.picture %>" />
       <h4 class="card-title"><%= product.title %></h4>
     </a>
     <% } else {%>
-    <img class="img-fluid"
-      src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/<%= product.picture %>" />
+    <img class="img-fluid" src="<%= product.picture %>" />
     <h4 class="card-title"><%= product.title %></h4>
     <% } %>
     <span class="badge badge-warning"><%= product.name %></span>
