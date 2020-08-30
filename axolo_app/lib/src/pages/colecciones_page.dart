@@ -55,8 +55,10 @@ class ColeccionPage extends StatelessWidget {
                             Navigator.pushNamed(context, 'adn',
                                 arguments: scans[index])
                           },
-                      leading: Image(
-                          image: NetworkImage(producto.imagen), height: 20),
+                      leading: FadeInImage(
+                          image: NetworkImage(producto.imagen),
+                          height: 20,
+                          placeholder: AssetImage('assets/placeholder.png')),
                       title: Text(producto.producto,
                           style: TextStyle(
                               color: Colors.black87,
